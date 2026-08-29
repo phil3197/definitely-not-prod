@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+app:
+  mock-definitions:
+    path: definitions
+
+logging:
+  level:
+    com.definitelynotprod: INFO

@@ -1,0 +1,8 @@
+build/
+.gradle/
+bin/
+.idea/
+*.iml
+.DS_Store
+definitions/**/*.json
+!definitions/example.json

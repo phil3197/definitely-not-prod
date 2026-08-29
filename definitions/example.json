@@ -1,0 +1,72 @@
+{
+  "apiName": "customer-api",
+  "version": "v1",
+  "basePath": "/api/customers",
+  "description": "Example customer API mocks",
+  "endpoints": [
+    {
+      "name": "get-customer-by-id",
+      "description": "Returns a mocked customer",
+      "enabled": true,
+      "priority": 10,
+      "method": "GET",
+      "path": "/42",
+      "headers": {
+        "X-Env": "dev"
+      },
+      "response": {
+        "status": 200,
+        "contentType": "application/json",
+        "headers": {
+          "X-Mock-Source": "customer-api"
+        },
+        "body": {
+          "id": 42,
+          "name": "Ada Lovelace",
+          "tier": "gold"
+        }
+      }
+    },
+    {
+      "name": "search-customer-by-status",
+      "description": "Matches by query params",
+      "enabled": true,
+      "priority": 5,
+      "method": "GET",
+      "path": "/search",
+      "queryParams": {
+        "status": "active"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "results": [
+            {
+              "id": 1,
+              "status": "active"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "create-customer",
+      "description": "Matches by JSON body",
+      "enabled": true,
+      "priority": 20,
+      "method": "POST",
+      "path": "/create",
+      "requestBodyMatch": {
+        "name": "Grace Hopper"
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "id": 1001,
+          "name": "Grace Hopper",
+          "created": true
+        }
+      }
+    }
+  ]
+}
