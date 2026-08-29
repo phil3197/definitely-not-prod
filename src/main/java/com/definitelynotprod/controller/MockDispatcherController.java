@@ -1,5 +1,6 @@
 package com.definitelynotprod.controller;
 
+import com.definitelynotprod.controller.dto.ErrorResponse;
 import com.definitelynotprod.domain.runtime.MatchResult;
 import com.definitelynotprod.domain.runtime.MatchStatus;
 import com.definitelynotprod.service.DefinitionRegistry;
@@ -60,12 +61,16 @@ public class MockDispatcherController {
             return responseResolver.resolve(result.endpoint());
         }
         if (result.status() == MatchStatus.METHOD_NOT_ALLOWED) {
-            return ResponseEntity.status(405).body(Map.of("error", "Method Not Allowed"));
+            return ResponseEntity.status(405).body(errorResponse("Method Not Allowed"));
         }
         if (result.status() == MatchStatus.INVALID_JSON_BODY) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid JSON request body"));
+            return ResponseEntity.badRequest().body(errorResponse("Invalid JSON request body"));
         }
-        return ResponseEntity.status(404).body(Map.of("error", "No mock matched"));
+        return ResponseEntity.status(404).body(errorResponse("No mock matched"));
+    }
+
+    private ErrorResponse errorResponse(String message) {
+        return new ErrorResponse(message);
     }
 
     private MultiValueMap<String, String> copyQueryParams(HttpServletRequest request) {
